@@ -1,0 +1,28 @@
+class emp{
+    String name;
+    int age;
+    
+    emp(String name,int age){
+      this.name=name;
+      this.age=age;
+    }
+}
+class payment extends emp{
+    int salary;
+    payment(String name,int age,int sal){
+        super(name,age);
+        salary=sal;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	   
+      payment pay = new payment("prithika",56,10000);
+      System.out.println(pay.name);
+      System.out.print(pay.age);
+	}
+}
+
+
