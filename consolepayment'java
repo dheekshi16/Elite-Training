@@ -1,0 +1,73 @@
+abstract class Payment{
+    int transactionId;
+    String cusName;
+    double amount;
+    
+    Payment(int tId,String n,double a){
+        this.transactionId = tId;
+        this.cusName = n;
+        this.amount = a;
+    }
+    
+    void displayDetails(){
+        System.out.println("The Customer Name "+cusName);
+        System.out.println("The Customer transaction Id "+transactionId);
+        System.out.println("The Customer amount "+amount);
+    }
+    abstract boolean validate();
+    abstract void process();
+    abstract double transactionFee();
+    abstract double cashBack();
+    abstract double finalAmount();
+}
+
+
+class DebitCard extends Payment{
+    String cardNum;
+    
+    DebitCard(int tId,String name,double amount,String cardno){
+        super(tId,name,amount);
+        this.cardNum = cardno;
+    }
+    
+    boolean validate(){
+        if(cardNum.length() == 16){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    void process(){
+        if(validate()){
+            System.out.println("Process Successful");
+            System.out.println("The Final amount is: "+finalAmount());
+        }
+        else{
+            System.out.println("Process Not Successful");
+        }
+    }
+    
+    double cashBack(){
+        return this.amount*0.05;
+    }
+    
+    
+    double transactionFee(){
+        return this.amount*0.02;
+    }
+    
+    double finalAmount(){
+        return this.amount+transactionFee();
+    }
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		    Payment   dc   = new DebitCard(123,"Naveen",100000,"1234567891011213");
+		    dc.process();
+	}
+}
